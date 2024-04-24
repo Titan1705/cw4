@@ -2,6 +2,8 @@ class Vacancy:
     """Класс вакансии, с его помощью будет формировать ЭК
     вакансий и список из ЭК вакансий полученных от API"""
 
+    __slots__ = ('vacancie_id', 'name', 'salary_from', 'salary_to', 'currency', 'url', 'requirements', 'responsibility')
+
     vacancies_list = []
     favorite_vacancies_list = []
 
@@ -83,7 +85,7 @@ class Vacancy:
                     f"Ссылка: {self.url}\n")
 
     @classmethod
-    def convert_to_object_list(cls, vacancies: dict):
+    def convert_to_object_list(cls, vacancies: dict) -> list:
         """Метод, который конвертирует полученный список вакансий в список ЭК"""
         for i in vacancies:
             # если зарплата не указана
