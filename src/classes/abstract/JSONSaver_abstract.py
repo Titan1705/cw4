@@ -12,3 +12,7 @@ class AbstractJSONSaver(ABC):
     @abstractmethod
     def delete_vacancy(self, vacancy):
         pass
+
+    @abstractmethod
+    def load_vacancy(self, vacancy):
+        pass
