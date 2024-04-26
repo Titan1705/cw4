@@ -4,9 +4,10 @@ from src.classes.HH_API import HeadHunterAPI
 
 
 class JSONSaver(AbstractJSONSaver, HeadHunterAPI):
-    """Класс для работы с JSON файлом вакансий
+    """Класс для работы с JSON файлом ваканси
     Если конкретнее, то для добавления и удаления вакансий"""
-    def add_vacancy(self, vacancy, response_json=None):
+
+    def add_vacancy(self, vacancy):
         with open('data/favorite_vacancies.json', 'r', encoding='utf-8') as file:
             try:
                 # если что-то есть, то просто считываем JSON-файл
@@ -20,10 +21,6 @@ class JSONSaver(AbstractJSONSaver, HeadHunterAPI):
             # тут уже просто добавляем к результату нашу вакансию и записываем в файл
             result.append(vacancy.__dict__)
             file.write(json.dumps(result))
-
-        with open('data/vacancies.json', 'w', encoding='utf-8') as file:
-            # запишем JSON-ответ в файл
-            file.write(json.dumps(response_json))
 
     def delete_vacancy(self, vacancy):
         with open('data/favorite_vacancies.json', 'r', encoding='utf-8') as file:
@@ -42,3 +39,13 @@ class JSONSaver(AbstractJSONSaver, HeadHunterAPI):
                     break
 
             file.write(json.dumps(result))
+
+    def load_vacancy(self, vacancy, response_json=None):
+
+        with open('data/vacancies.json', 'r', encoding='utf-8') as file:
+            new_list = json.load(file)
+            return new_list
+
+        with open('data/vacancies.json', 'w', encoding='utf-8') as file:
+            # запишем JSON-ответ в файл
+            file.write(json.dumps(response_json))
